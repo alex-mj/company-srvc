@@ -1,17 +1,17 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/alex-mj/company-srvc/domain"
+	"github.com/gin-gonic/gin"
+)
 
 type Handler struct {
-	//services *service.Service
+	CompanyService *domain.CompanyService
+	UserService    *domain.UserService
 }
 
-// func NewHandler(services *service.Service) *Handler {
-// 	return &Handler{services: services}
-// }
-
-func NewHandler() *Handler {
-	return &Handler{}
+func NewHandler(company domain.CompanyService, user domain.UserService) *Handler {
+	return &Handler{CompanyService: &company, UserService: &user}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {

@@ -33,11 +33,6 @@ type CompanyDeleter interface {
 	DeleteCompany(filter string) ([]Company, error)
 }
 
-// for middleware
-// вызываешь следующий обработчик
-// он возвращает массив: результаты обработки
-// если операция мутабельная (не чтение),
-// то перебрасываем их в очередь
 type QueueMessenger interface {
 	SendJSON(filter string) ([]Company, error)
 }

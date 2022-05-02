@@ -20,6 +20,11 @@ type AccessMatrix struct {
 	Delete bool `json:"delete"`
 }
 
+type UserService interface {
+	AccessMatrixGeter
+	AccessMatrixModifier
+}
+
 // for UserService
 type AccessMatrixGeter interface {
 	GetAccessMatrix(userID int) (Access, error)
