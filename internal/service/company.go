@@ -7,14 +7,14 @@ import (
 )
 
 // for repository level
-type CompanyStorage interface {
+type CompanyStorager interface {
 	// сохранить компанию в хранилище
 	// обновить компанию в хранилище
 	// запросить лист компаний из хранилища
 }
 
 type CompanyService struct {
-	CompanyStorage *CompanyStorage
+	CompanyStorage *CompanyStorager
 }
 
 func (s *CompanyService) CreateCompany(filter string) ([]domain.Company, error) {
@@ -37,17 +37,17 @@ func (s *CompanyService) DeleteCompany(filter string) ([]domain.Company, error) 
 	return []domain.Company{}, nil
 }
 
-// for middleware
-// вызываешь следующий обработчик
-// он возвращает массив: результаты обработки
-// если операция мутабельная (не чтение),
-// то перебрасываем их в очередь
+// for middleware:
+// you call the following handler
+// it returns a slice: the results of processing
+// if the operation is mutable (not read),
+// throw them into the queue
 func (s *CompanyService) SendJSON(filter string) ([]domain.Company, error) {
 	fmt.Println("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 
-func NewCompanyService(cStorage CompanyStorage) *CompanyService {
+func NewCompanyService(cStorage CompanyStorager) *CompanyService {
 	return &CompanyService{
 		CompanyStorage: &cStorage,
 	}

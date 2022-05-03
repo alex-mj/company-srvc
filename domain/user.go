@@ -1,7 +1,9 @@
 package domain
 
+//go:generate mockgen -source=user.go -destination=mock/user_mock.go -package=domain
+
 type User struct {
-	ID       int    `json:"id"`
+	//ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Password string `json:"password"`
 	Access   Access
@@ -20,14 +22,19 @@ type AccessMatrix struct {
 	Delete bool `json:"delete"`
 }
 
-type UserService interface {
+type UserHandler interface {
+	TokenCreator
 	AccessMatrixGeter
 	AccessMatrixModifier
 }
 
 // for UserService
 type AccessMatrixGeter interface {
-	GetAccessMatrix(userID int) (Access, error)
+	GetAccessMatrix(Name string) (Access, error)
+}
+
+type TokenCreator interface {
+	GetToken(Name, Password string) (string, error)
 }
 
 // for IPChekService

@@ -11,19 +11,22 @@ type signInInput struct {
 	Password string `json: "password" binding: "required"`
 }
 
-func (h *Handler) signIn(c *gin.Context) {
+func (h *Handlers) signIn(c *gin.Context) {
 	var input signInInput
 
 	if err := c.BindJSON(&input); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		input.UserName = c.Query("username")
+		input.Password = c.Query("password")
+		if input.UserName == "" || input.Password == "" {
+			newErrorResponse(c, http.StatusBadRequest, err.Error())
+			return
+		}
+	}
+	token, err := h.UserService.GetToken(input.UserName, input.Password)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	token := "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-	// token, err := h.services.Authorization.GenerationToken(input.Userame, input.Password)
-	// if err != nil {
-	// 	newErrorResponse(c, http.StatusInternalServerError, err.Error())
-	// 	return
-	// }
 
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"token": token,

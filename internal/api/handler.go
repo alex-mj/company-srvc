@@ -5,16 +5,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Handler struct {
-	CompanyService *domain.CompanyService
-	UserService    *domain.UserService
+type Handlers struct {
+	CompanyService domain.CompanyHandler
+	UserService    domain.UserHandler
 }
 
-func NewHandler(company domain.CompanyService, user domain.UserService) *Handler {
-	return &Handler{CompanyService: &company, UserService: &user}
+func NewHandler(company domain.CompanyHandler, user domain.UserHandler) *Handlers {
+	return &Handlers{CompanyService: company, UserService: user}
 }
 
-func (h *Handler) InitRoutes() *gin.Engine {
+func (h *Handlers) InitRoutes() *gin.Engine {
 	router := gin.New()
 	api := router.Group("/api/v1")
 	{

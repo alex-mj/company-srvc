@@ -7,22 +7,26 @@ import (
 )
 
 // for repository level
-type AuthRepository interface {
-	CheckToken(userID int, token string) (bool, error)
-	// создать токен
+type AuthRepositor interface {
+	CheckToken(userName string, token string) (bool, error)
+	CreateToken(userName, password string) (string, error)
 }
 
 type UserService struct {
-	AuthRepository *AuthRepository
+	AuthJWT AuthRepositor
 }
 
-func NewUserService(AuthRepo AuthRepository) *UserService {
+func NewUserService(AuthJWT AuthRepositor) *UserService {
 	return &UserService{
-		AuthRepository: &AuthRepo,
+		AuthJWT: AuthJWT,
 	}
 }
 
-func (s *UserService) GetAccessMatrix(userID int) (domain.Access, error) {
+func (s *UserService) GetToken(usr, pwd string) (string, error) {
+	return s.AuthJWT.CreateToken(usr, pwd)
+}
+
+func (s *UserService) GetAccessMatrix(useNmae string) (domain.Access, error) {
 	fmt.Println("STUB: GetAccessMatrix / userID not used -> TODO: 1) 0100 2) map[int]domain.Access")
 	return domain.Access{
 		Token: "",

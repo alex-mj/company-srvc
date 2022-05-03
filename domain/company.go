@@ -1,5 +1,7 @@
 package domain
 
+//go:generate mockgen -source=company.go -destination=mock/company_mock.go -package=domain
+
 type Company struct {
 	Name    string `json:"name"`
 	Code    int    `json:"code"`
@@ -37,7 +39,7 @@ type QueueMessenger interface {
 	SendJSON(filter string) ([]Company, error)
 }
 
-type CompanyService interface {
+type CompanyHandler interface {
 	CompanyCreater
 	CompanyReader
 	CompanyUpdater
