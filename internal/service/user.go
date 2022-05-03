@@ -1,14 +1,13 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/alex-mj/company-srvc/domain"
+	"github.com/alex-mj/company-srvc/internal/logger"
 )
 
 // for repository level
 type AuthRepositor interface {
-	CheckToken(userName string, token string) (bool, error)
+	CheckToken(token string) (bool, error)
 	CreateToken(userName, password string) (string, error)
 }
 
@@ -23,24 +22,34 @@ func NewUserService(AuthJWT AuthRepositor) *UserService {
 }
 
 func (s *UserService) GetToken(usr, pwd string) (string, error) {
+	logger.L.Info("usr: ", usr, " pwd: ", pwd)
 	return s.AuthJWT.CreateToken(usr, pwd)
 }
 
-func (s *UserService) GetAccessMatrix(useNmae string) (domain.Access, error) {
-	fmt.Println("STUB: GetAccessMatrix / userID not used -> TODO: 1) 0100 2) map[int]domain.Access")
-	return domain.Access{
-		Token: "",
+func (s *UserService) GetAccessMatrix(token string) (domain.Access, error) {
+	logger.L.Info("STUB: GetAccessMatrix / userID not used -> TODO: 1) 0100 2) map[int]domain.Access")
+	access := domain.Access{
+		Token: token,
 		AccessMatrix: domain.AccessMatrix{
-			Create: true,
+			Create: false,
 			Read:   true,
 			Update: true,
-			Delete: true,
+			Delete: false,
 		},
-	}, nil
+	}
+	auth, err := s.AuthJWT.CheckToken(token)
+	if err != nil {
+		logger.L.Debug(err)
+	}
+	if auth {
+		access.AccessMatrix.Create = true
+		access.AccessMatrix.Delete = true
+	}
+	return access, nil
 }
 
 func (s *UserService) ModifyByIP(AccessMatrix domain.AccessMatrix) (domain.AccessMatrix, error) {
-	fmt.Println("STUB: AccessMatrixModifier / TODO:  0**0 => if IP[Ciprus] => 1**1")
+	logger.L.Info("STUB: AccessMatrixModifier / TODO:  0**0 => if IP[Ciprus] => 1**1")
 	return domain.AccessMatrix{
 		Create: true,
 		Read:   true,

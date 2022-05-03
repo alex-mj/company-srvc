@@ -30,7 +30,7 @@ type UserHandler interface {
 
 // for UserService
 type AccessMatrixGeter interface {
-	GetAccessMatrix(Name string) (Access, error)
+	GetAccessMatrix(token string) (Access, error)
 }
 
 type TokenCreator interface {

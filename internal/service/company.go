@@ -1,9 +1,8 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/alex-mj/company-srvc/domain"
+	"github.com/alex-mj/company-srvc/internal/logger"
 )
 
 // for repository level
@@ -18,22 +17,22 @@ type CompanyService struct {
 }
 
 func (s *CompanyService) CreateCompany(filter string) ([]domain.Company, error) {
-	fmt.Println("STUB: CreateCompany / filter not used -> TODO: 1) DB 2) filter")
+	logger.L.Info("STUB: CreateCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 
 func (s *CompanyService) ReadCompany(filter string) ([]domain.Company, error) {
-	fmt.Println("STUB: ReadCompany / filter not used -> TODO: 1) DB 2) filter")
+	logger.L.Info("STUB: ReadCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 
 func (s *CompanyService) UpdateCompany(filter string) ([]domain.Company, error) {
-	fmt.Println("STUB: UpdateCompany / filter not used -> TODO: 1) DB 2) filter")
+	logger.L.Info("STUB: UpdateCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 
 func (s *CompanyService) DeleteCompany(filter string) ([]domain.Company, error) {
-	fmt.Println("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
+	logger.L.Info("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 
@@ -43,7 +42,7 @@ func (s *CompanyService) DeleteCompany(filter string) ([]domain.Company, error) 
 // if the operation is mutable (not read),
 // throw them into the queue
 func (s *CompanyService) SendJSON(filter string) ([]domain.Company, error) {
-	fmt.Println("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
+	logger.L.Info("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil
 }
 

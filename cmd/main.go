@@ -24,7 +24,7 @@ func main() {
 	userService := service.NewUserService(authJWT)
 
 	// company
-	companyStorage, err := repository.NewPostgresStorage(getDBConfig())
+	companyStorage, err := repository.NewPostgresStorage(repository.GetDBConfig())
 	if err != nil {
 		logger.L.DPanic("Check the data base (postgres): ", err)
 	}
@@ -43,16 +43,4 @@ func initConfig() error {
 	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
 	return viper.ReadInConfig()
-}
-
-func getDBConfig() repository.PostgresConfig {
-	return repository.PostgresConfig{
-		Host:     viper.GetString("postgres.host"),
-		Port:     viper.GetString("postgres.port"),
-		UserName: viper.GetString("postgres.user"),
-		Password: viper.GetString("postgres.password"),
-		DBName:   viper.GetString("postgres.dbname"),
-		SSLMode:  viper.GetString("postgres.sslmode"),
-	}
-
 }

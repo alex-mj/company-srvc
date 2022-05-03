@@ -5,6 +5,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"github.com/spf13/viper"
 )
 
 type PostgresDB struct {
@@ -32,4 +33,15 @@ func NewPostgresStorage(cfg PostgresConfig) (*PostgresDB, error) {
 		return nil, err
 	}
 	return &PostgresDB{db: db}, nil
+}
+
+func GetDBConfig() PostgresConfig {
+	return PostgresConfig{
+		Host:     viper.GetString("postgres.host"),
+		Port:     viper.GetString("postgres.port"),
+		UserName: viper.GetString("postgres.user"),
+		Password: viper.GetString("postgres.password"),
+		DBName:   viper.GetString("postgres.dbname"),
+		SSLMode:  viper.GetString("postgres.sslmode"),
+	}
 }

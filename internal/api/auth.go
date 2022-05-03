@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 
+	"github.com/alex-mj/company-srvc/internal/logger"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +23,7 @@ func (h *Handlers) signIn(c *gin.Context) {
 			return
 		}
 	}
+	logger.L.Debugf("signIn: %+v", input)
 	token, err := h.UserService.GetToken(input.UserName, input.Password)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
