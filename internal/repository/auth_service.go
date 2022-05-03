@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -59,7 +58,7 @@ func (a *AuthJWTSrvc) CheckToken(accessToken string) (bool, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("invalid signing method")
 		}
-		return []byte(os.Getenv("SIGNING_KEY")), nil
+		return []byte(viper.GetString("signing.key")), nil
 	})
 	if err != nil {
 		return false, err

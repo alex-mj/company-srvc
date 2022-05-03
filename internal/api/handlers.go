@@ -19,7 +19,7 @@ func (h *Handlers) InitRoutes() *gin.Engine {
 	api := router.Group("/api/v1")
 	{
 		api.POST("/sign-in", h.signIn)
-		companies := api.Group("/companies")
+		companies := api.Group("/companies", h.userIdentity)
 		{
 			companies.POST("/", h.createCompany)
 			companies.GET("/", h.readCompanies)

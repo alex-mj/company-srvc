@@ -1,4 +1,3 @@
-
 package logger
 
 import "go.uber.org/zap"
@@ -13,4 +12,9 @@ func InitSugar() {
 
 func SyncForExit() {
 	L.Sync()
+}
+
+// Init is not a popular mechanic but is justified for connecting the log to tests.
+func init() {
+	InitSugar()
 }

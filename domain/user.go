@@ -6,13 +6,8 @@ type User struct {
 	//ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Password string `json:"password"`
-	Access   Access
+	Access   AccessMatrix
 	IP       string `json:"ip"`
-}
-
-type Access struct {
-	Token string `json:"token"`
-	AccessMatrix
 }
 
 type AccessMatrix struct {
@@ -30,7 +25,7 @@ type UserHandler interface {
 
 // for UserService
 type AccessMatrixGeter interface {
-	GetAccessMatrix(token string) (Access, error)
+	GetAccessMatrix(token, IP string) (AccessMatrix, error)
 }
 
 type TokenCreator interface {

@@ -21,7 +21,8 @@ func main() {
 	logger.L.Info("Starting COMPANY service...")
 	// user authentication
 	authJWT := repository.NewAuthJWT()
-	userService := service.NewUserService(authJWT)
+	ipapi := repository.NewIPAPI()
+	userService := service.NewUserService(authJWT, ipapi)
 
 	// company
 	companyStorage, err := repository.NewPostgresStorage(repository.GetDBConfig())
@@ -29,7 +30,7 @@ func main() {
 		logger.L.DPanic("Check the data base (postgres): ", err)
 	}
 	companyService := service.NewCompanyService(companyStorage)
-
+	// run api
 	handlers := api.NewHandler(companyService, userService)
 
 	srv := new(srv.Server)

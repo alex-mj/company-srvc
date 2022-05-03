@@ -10,33 +10,24 @@ type Company struct {
 	Phone   string `json:"phone"`
 }
 
-// или заменить на []Company ?
-type Filter struct {
-	Name    []string `json:"name"`
-	Code    []string `json:"code"`
-	Country []string `json:"country"`
-	Website []string `json:"website"`
-	Phone   []string `json:"phone"`
-}
-
 type CompanyCreater interface {
-	CreateCompany(filter string) ([]Company, error)
+	CreateCompany(newEntity Company, access AccessMatrix) ([]Company, error)
 }
 
 type CompanyReader interface {
-	ReadCompany(filter string) ([]Company, error)
+	ReadCompany(filter Filter, access AccessMatrix) ([]Company, error)
 }
 
 type CompanyUpdater interface {
-	UpdateCompany(filter string) ([]Company, error)
+	UpdateCompany(sampleCompany Company, filter Filter, access AccessMatrix) ([]Company, error)
 }
 
 type CompanyDeleter interface {
-	DeleteCompany(filter string) ([]Company, error)
+	DeleteCompany(filter Filter, access AccessMatrix) ([]Company, error)
 }
 
 type QueueMessenger interface {
-	SendJSON(filter string) ([]Company, error)
+	SendJSON(filter Filter, access AccessMatrix) ([]Company, error)
 }
 
 type CompanyHandler interface {

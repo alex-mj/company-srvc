@@ -6,4 +6,7 @@ postgres:
   password: "qwerty5432" #TODO: need secret k8s
   dbname: "postgres"
   sslmode: "disable"
-signing.key: "w4ert&@Nogu%Zl0m1t%u73HbIM"
+signing.key: "w4ert&@Nogu%Zl0m1t%u73HbIM" #TODO: need secret k8s
+access.option:
+  cyprus: false
+  jwt: true
