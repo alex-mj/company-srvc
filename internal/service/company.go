@@ -11,6 +11,8 @@ import (
 type CompanyStorager interface {
 	CreateCompany(newEntity domain.Company, access domain.AccessMatrix) error
 	ReadCompanies(filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error)
+	UpdateCompanies(sampleCompany domain.Company, filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error)
+
 	// обновить компанию в хранилище
 	// запросить лист компаний из хранилища
 }
@@ -37,13 +39,27 @@ func (s *CompanyService) CreateCompany(newEntity domain.Company, access domain.A
 }
 
 func (s *CompanyService) ReadCompany(filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error) {
-	logger.L.Info("STUB: ReadCompany / filter not used -> TODO: 1) DB 2) filter")
-	return []domain.Company{}, nil
+	if !access.Read {
+		return []domain.Company{}, errors.New("access denied for Read company")
+	}
+	read, err := s.CompanyStorage.ReadCompanies(filter, access)
+	if err != nil {
+		logger.L.Error("check filter: ", filter)
+		return []domain.Company{}, err
+	}
+	return read, nil
 }
 
 func (s *CompanyService) UpdateCompany(sampleCompany domain.Company, filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error) {
-	logger.L.Info("STUB: UpdateCompany / filter not used -> TODO: 1) DB 2) filter")
-	return []domain.Company{}, nil
+	if !access.Update {
+		return []domain.Company{}, errors.New("access denied for UPDATE company")
+	}
+	updated, err := s.CompanyStorage.ReadCompanies(filter, access)
+	if err != nil {
+		logger.L.Error("check filter: ", filter)
+		return []domain.Company{}, err
+	}
+	return updated, nil
 }
 
 func (s *CompanyService) DeleteCompany(filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error) {

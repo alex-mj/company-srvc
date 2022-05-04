@@ -39,18 +39,72 @@ func (h *Handlers) createCompany(c *gin.Context) {
 }
 
 func (h *Handlers) readCompanies(c *gin.Context) {
-	// filter := domain.Filter{}
-	// filter.Name = append(filter.Name, input.Name)
-	// filter.Country = append(filter.Country, input.Country)
-	// filter.Website = append(filter.Website, input.Website)
-	// filter.Phone = append(filter.Phone, input.Phone)
-}
+	logger.L.Debug("!!! readCompanies !!!")
+	access, err := getAccessMatrix(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-func (h *Handlers) readCompany(c *gin.Context) {
+	filter := domain.Filter{}
+	filter.Name = c.QueryArray("name")
+	filter.Code = c.QueryArray("code")
+	filter.Country = c.QueryArray("country")
+	filter.Website = c.QueryArray("website")
+	filter.Phone = c.QueryArray("phone")
+
+	id := c.Param("id")
+	if id != "" {
+		filter.Code = append(filter.Code, id)
+	}
+	read, err := h.CompanyService.ReadCompany(filter, access)
+	logger.L.Debug("h.CompanyService.readCompanies: ", read, err)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"company": read,
+	})
 
 }
 
 func (h *Handlers) updateCompany(c *gin.Context) {
+	logger.L.Debug("!!! updateCompany !!!")
+	access, err := getAccessMatrix(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	filter := domain.Filter{}
+	filter.Name = c.QueryArray("name")
+	filter.Code = c.QueryArray("code")
+	filter.Country = c.QueryArray("country")
+	filter.Website = c.QueryArray("website")
+	filter.Phone = c.QueryArray("phone")
+
+	id := c.Param("id")
+	if id != "" {
+		filter.Code = append(filter.Code, id)
+	}
+
+	var sampleCompany domain.Company
+	if err := c.BindJSON(&sampleCompany); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error()+" /check input json")
+		return
+	}
+	logger.L.Debug("sampleCompany %+v", sampleCompany)
+	updated, err := h.CompanyService.UpdateCompany(sampleCompany, filter, access)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"company": updated,
+	})
 
 }
 
