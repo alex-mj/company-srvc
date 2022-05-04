@@ -10,9 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// авторизация, если пусто то возвращаем матрицу только на чтение
-// заполненную проверяем пароль и получаем матрицу привилегий через сервис user (замокать интерфейс userGeter)
-
 const (
 	authorizationHeader = "Authorization"
 	accessCtx           = "accessMatrix"

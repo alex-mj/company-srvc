@@ -35,6 +35,7 @@ run project:
 
 ```
 
+example filtering:
 
 <img width="788" alt="image" src="https://user-images.githubusercontent.com/13572116/166609110-bbce1db3-965b-4494-85cd-e0ab75a69900.png">
 <img width="605" alt="image" src="https://user-images.githubusercontent.com/13572116/166609166-c39a0982-b8a0-497a-a54d-0affedef61d8.png">
