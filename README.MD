@@ -64,5 +64,8 @@ and DELETE, if I have one
 
 <img width="491" alt="image" src="https://user-images.githubusercontent.com/13572116/166631817-eed396b5-e7a0-4a76-9b1d-5e68f148da75.png">
 
+Delete the list of companies by filter
+
+<img width="590" alt="image" src="https://user-images.githubusercontent.com/13572116/166632843-901102d1-2fed-4095-806e-4da076217a13.png">
 
 ```
