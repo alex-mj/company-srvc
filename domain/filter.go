@@ -3,8 +3,6 @@ package domain
 import (
 	"fmt"
 	"strings"
-
-	"github.com/alex-mj/company-srvc/internal/logger"
 )
 
 type Filter struct {
@@ -33,7 +31,6 @@ func (f *Filter) IsEmptyWithoutCountry() bool {
 // WHERE NAME IN ('Dreamland') AND CODE in ('2','1') AND WEBSITE IN ('www.dreamland.com') AND...
 func (f *Filter) ToSQLWithoutCountry() string {
 
-	logger.L.Debug("f.ToSQLWithoutCountry: %+v", f)
 	if f.IsEmptyWithoutCountry() {
 		return ""
 	}
@@ -53,7 +50,6 @@ func (f *Filter) ToSQLWithoutCountry() string {
 		and = " AND "
 	}
 	if len(f.Code) > 0 {
-		logger.L.Debug("len(f.Code): ", len(f.Code))
 		code = and + " CODE in (" + strings.Join(f.Code, ", ") + ") "
 		and = " AND "
 	}
@@ -84,7 +80,6 @@ func (f *Filter) ToSQLCountryCode(codes []int) string {
 	sql := " COUNTRY_ID in ("
 	comma := ""
 	for _, v := range codes {
-		logger.L.Debug("v: ", v)
 		sql += comma + "'" + fmt.Sprint(v) + "'"
 		comma = ","
 	}

@@ -1,47 +1,40 @@
 Hello.
 
-Welcome aboard!
+## Current status:
+Tests were done partially - integration tests, unit tests require more time.
+The "optional: JSON in MQ" task requires more time
+K8S requires more time
 
-POST   /api/v1/sign-in       
-POST   /api/v1/companies/    
-GET    /api/v1/companies/    
-GET    /api/v1/companies/:id 
-PUT    /api/v1/companies/:id 
-DELETE /api/v1/companies/:id 
+## API endpoints:
+POST   /api/v1/sign-in        
+POST   /api/v1/companies/     
+GET    /api/v1/companies/     
+GET    /api/v1/companies/:id  
+PUT    /api/v1/companies/     
+PUT    /api/v1/companies/:id  
+DELETE /api/v1/companies/     
+DELETE /api/v1/companies/:id  
 
-
-docker run --name=company-srvc-db -e POSTGRES_PASSWORD='qwerty' -p 5432:5432 -d --rm postgres 
-docker run --name company-srvc-db -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=qwerty -e POSTGRES_DB=postgres -d -v "$(pwd)":/docker-entrypoint-initdb.d postgres:14-alpine
 ## how to start local
 
-get docker
-get docker-compose 
+need docker & docker-compose 
 
-data base:
+create data base:
 ```shell script
  docker-compose -f docker-compose-pg.yaml up -d
 ```
-message queue:
-```shell script
- docker-compose -f docker-compose-mq.yaml up -d
-```
+The database will be initialized automatically by the docker-composer via the /initdb/init.sh
+
+The settings for the service are in configs/config.yaml
 
 run project:
 ```shell script
+ go build cmd/main.go
+ go test ./... 
  go run cmd/main.go
+
 ```
 
-entry point for database initialization - docker-entrypoint-initdb.d. 
-
-Any *.sql or *.sh files in this directory will be treated as database initialization scripts. There are a few nuances:
-
-if the database has already been initialized earlier, no changes will be applied to it;
-
-if there are several files in the directory, they will be sorted by name using the current locale (by default en_US.utf8).
-
-
-docker build -t postgres-db ./
-docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
 
 <img width="788" alt="image" src="https://user-images.githubusercontent.com/13572116/166609110-bbce1db3-965b-4494-85cd-e0ab75a69900.png">
 <img width="605" alt="image" src="https://user-images.githubusercontent.com/13572116/166609166-c39a0982-b8a0-497a-a54d-0affedef61d8.png">
@@ -68,4 +61,5 @@ Delete the list of companies by filter
 
 <img width="590" alt="image" src="https://user-images.githubusercontent.com/13572116/166632843-901102d1-2fed-4095-806e-4da076217a13.png">
 
-```
+
+
