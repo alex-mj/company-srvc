@@ -71,14 +71,18 @@ Delete the list of companies by filter
 <img width="590" alt="image" src="https://user-images.githubusercontent.com/13572116/166632843-901102d1-2fed-4095-806e-4da076217a13.png">
 
 Example test data:
+
 {
     "name":"BNP Paribas",
     "country":"France",
     "website":"https://group.bnpparibas/en/",
     "phone":"8766253477-6756747"
 }
+
 Example auth:
+
 POST: http://localhost:8000/api/v1/sign-in?username=test&password=test
 
 Example CRUD (update):
+
 PUT: http://localhost:8000/api/v1/companies/?country=USA
