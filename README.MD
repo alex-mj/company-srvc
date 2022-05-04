@@ -53,5 +53,7 @@ docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/13572116/166609329-b9e87a54-ff25-4d0d-8bb4-1c1c1e24a695.png">
 <img width="482" alt="image" src="https://user-images.githubusercontent.com/13572116/166609361-37814920-7cfc-4423-a1f4-97cbfed1dfe1.png">
 
+update: filter: "usa", sample: only "phone"
+<img width="615" alt="image" src="https://user-images.githubusercontent.com/13572116/166629124-36fb5447-8c29-4a2a-bcad-c07e008b2712.png">
 
 ```
