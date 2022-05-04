@@ -1,6 +1,10 @@
 package logger
 
-import "go.uber.org/zap"
+import (
+	"fmt"
+
+	"go.uber.org/zap"
+)
 
 // L is logger
 var L *zap.SugaredLogger
@@ -11,7 +15,10 @@ func InitSugar() {
 }
 
 func SyncForExit() {
-	L.Sync()
+	err := L.Sync()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 // Init is not a popular mechanic but is justified for connecting the log to tests.

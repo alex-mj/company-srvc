@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestWriteCountry(t *testing.T) {
+func TestWriteReadCountry(t *testing.T) {
 
 	p := initPostgres()
 

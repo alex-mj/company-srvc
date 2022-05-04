@@ -1,9 +1,6 @@
 package domain
 
-//go:generate mockgen -source=user.go -destination=mock/user_mock.go -package=domain
-
 type User struct {
-	//ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Password string `json:"password"`
 	Access   AccessMatrix

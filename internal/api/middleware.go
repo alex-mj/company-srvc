@@ -13,7 +13,6 @@ import (
 const (
 	authorizationHeader = "Authorization"
 	accessCtx           = "accessMatrix"
-	countCtx            = "count"
 )
 
 func (h *Handlers) userIdentity(c *gin.Context) {

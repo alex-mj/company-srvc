@@ -28,7 +28,7 @@ func (f *Filter) IsEmptyWithoutCountry() bool {
 		len(f.Phone) == 0
 }
 
-// WHERE NAME IN ('Dreamland') AND CODE in ('2','1') AND WEBSITE IN ('www.dreamland.com') AND...
+//hint: WHERE NAME IN ('Dreamland') AND CODE in ('2','1') AND WEBSITE IN ('www.dreamland.com') AND...
 func (f *Filter) ToSQLWithoutCountry() string {
 
 	if f.IsEmptyWithoutCountry() {
@@ -51,13 +51,12 @@ func (f *Filter) ToSQLWithoutCountry() string {
 	}
 	if len(f.Code) > 0 {
 		code = and + " CODE in (" + strings.Join(f.Code, ", ") + ") "
-		and = " AND "
 	}
 
 	return sql + name + website + phone + code
 }
 
-// WHERE NAME IN ("GERMANY", "FRANCE")
+//hint: WHERE NAME IN ("GERMANY", "FRANCE")
 func (f *Filter) ToSQLOnLyCountry() string {
 
 	if len(f.Country) == 0 {
@@ -71,7 +70,7 @@ func (f *Filter) ToSQLOnLyCountry() string {
 	return "WHERE upper(COUNTRY.NAME) in (" + sql + ") "
 }
 
-// COUNTRY_ID IN ('1', '2)
+//hint: COUNTRY_ID IN ('1', '2)
 func (f *Filter) ToSQLCountryCode(codes []int) string {
 
 	if len(codes) == 0 {

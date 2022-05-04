@@ -151,7 +151,6 @@ func (p *PostgresDB) toSQLUpdateCompany(sampleCompany domain.Company) string {
 	}
 	if len(sampleCompany.Phone) > 0 {
 		sql += comma + fmt.Sprintf(" phone = '%s'", sampleCompany.Phone)
-		comma = ", "
 	}
 	return sql
 }

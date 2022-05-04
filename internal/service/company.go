@@ -99,7 +99,7 @@ func (s *CompanyService) DeleteCompany(filter domain.Filter, access domain.Acces
 	return read, nil
 }
 
-//////////////////////////
+// TODO: implement it (JSON to MQ)
 func (s *CompanyService) SendJSON(filter domain.Filter, access domain.AccessMatrix) ([]domain.Company, error) {
 	logger.L.Info("STUB: DeleteCompany / filter not used -> TODO: 1) DB 2) filter")
 	return []domain.Company{}, nil

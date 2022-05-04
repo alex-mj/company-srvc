@@ -26,6 +26,14 @@ create data base:
 The database will be initialized automatically by the docker-composer via the /initdb/init.sh
 
 The settings for the service are in configs/config.yaml
+```shell script
+access.option:
+  cyprus: false
+  jwt: true
+```
+for JWT:
+user: test 
+password: test
 
 run project:
 ```shell script

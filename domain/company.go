@@ -1,7 +1,5 @@
 package domain
 
-//go:generate mockgen -source=company.go -destination=mock/company_mock.go -package=domain
-
 type Company struct {
 	Name    string `json:"name"`
 	Code    int    `json:"code"`

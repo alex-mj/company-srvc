@@ -59,7 +59,7 @@ func TestCRUDCompany(t *testing.T) {
 	filterAll := domain.Filter{
 		Country: []string{"cntr1", "cntr2"},
 	}
-	// clear on EXIT
+	// clear on EXIT (ignore errors)
 	companySrvc.DeleteCompany(filterCntr1, accessFull)
 	companySrvc.DeleteCompany(filterCntr2, accessFull)
 	// Test: CreateCompany
@@ -83,7 +83,7 @@ func TestCRUDCompany(t *testing.T) {
 		require.Equal(t, want, actual, "Try write 3 company, and read 2 by country (cntr2)")
 
 	}
-	// Test: DeleteCompanyByName 
+	// Test: DeleteCompanyByName
 	// 2) remove one of them by name
 	// *) read all of them (we see 2 of them)
 	companySrvc.DeleteCompany(filterName3, accessFull)
@@ -126,12 +126,6 @@ func TestCRUDCompany(t *testing.T) {
 }
 
 // ---- init's ---
-func initUserSrvc() *service.UserService {
-	// user authentication
-	authJWT := repository.NewAuthJWT()
-	ipapi := repository.NewIPAPI()
-	return service.NewUserService(authJWT, ipapi)
-}
 
 func initCompanieSrvc() *service.CompanyService {
 	companyStorage := initPostgres()
