@@ -54,6 +54,15 @@ docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
 <img width="482" alt="image" src="https://user-images.githubusercontent.com/13572116/166609361-37814920-7cfc-4423-a1f4-97cbfed1dfe1.png">
 
 update: filter: "usa", sample: only "phone"
+
 <img width="615" alt="image" src="https://user-images.githubusercontent.com/13572116/166629124-36fb5447-8c29-4a2a-bcad-c07e008b2712.png">
+
+acccess denied without jwt:
+
+<img width="455" alt="image" src="https://user-images.githubusercontent.com/13572116/166631694-1e7a74af-3ee9-428d-9aa8-9db783022afc.png">
+and DELETE, if I have one
+
+<img width="491" alt="image" src="https://user-images.githubusercontent.com/13572116/166631817-eed396b5-e7a0-4a76-9b1d-5e68f148da75.png">
+
 
 ```
