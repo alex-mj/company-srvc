@@ -103,11 +103,39 @@ func (h *Handlers) updateCompany(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, map[string]interface{}{
-		"company": updated,
+		"updated": updated,
 	})
 
 }
 
 func (h *Handlers) deleteCompany(c *gin.Context) {
+	logger.L.Debug("!!! deleteCompany !!!")
+	access, err := getAccessMatrix(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	filter := domain.Filter{}
+	filter.Name = c.QueryArray("name")
+	filter.Code = c.QueryArray("code")
+	filter.Country = c.QueryArray("country")
+	filter.Website = c.QueryArray("website")
+	filter.Phone = c.QueryArray("phone")
+
+	id := c.Param("id")
+	if id != "" {
+		filter.Code = append(filter.Code, id)
+	}
+	logger.L.Debug("delete filter %+v", filter)
+	deleted, err := h.CompanyService.DeleteCompany(filter, access)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"deleted": deleted,
+	})
 
 }
