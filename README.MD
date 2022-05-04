@@ -31,11 +31,14 @@ run project:
  go run cmd/main.go
 ```
 
-entry point for database initialization - docker-entrypoint-initdb.d. Any *.sql or *.sh files in this directory will be treated as database initialization scripts. There are a few nuances:
+entry point for database initialization - docker-entrypoint-initdb.d. 
+
+Any *.sql or *.sh files in this directory will be treated as database initialization scripts. There are a few nuances:
 
 if the database has already been initialized earlier, no changes will be applied to it;
 
 if there are several files in the directory, they will be sorted by name using the current locale (by default en_US.utf8).
+
 
 docker build -t postgres-db ./
 docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
@@ -46,3 +49,9 @@ docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
 
 
 <img width="788" alt="image" src="https://user-images.githubusercontent.com/13572116/166609110-bbce1db3-965b-4494-85cd-e0ab75a69900.png">
+
+<img width="450" alt="image" src="https://user-images.githubusercontent.com/13572116/166609329-b9e87a54-ff25-4d0d-8bb4-1c1c1e24a695.png">
+<img width="482" alt="image" src="https://user-images.githubusercontent.com/13572116/166609361-37814920-7cfc-4423-a1f4-97cbfed1dfe1.png">
+
+
+```
