@@ -39,3 +39,10 @@ if there are several files in the directory, they will be sorted by name using t
 
 docker build -t postgres-db ./
 docker run -d --name postgres-db-cmpny -p 5432:5432 postgres-db
+
+<img width="788" alt="image" src="https://user-images.githubusercontent.com/13572116/166609110-bbce1db3-965b-4494-85cd-e0ab75a69900.png">
+<img width="605" alt="image" src="https://user-images.githubusercontent.com/13572116/166609166-c39a0982-b8a0-497a-a54d-0affedef61d8.png">
+<img width="580" alt="image" src="https://user-images.githubusercontent.com/13572116/166609205-1ff3a942-c8ed-4cfa-bf3e-c06b0b15c347.png">
+
+
+<img width="788" alt="image" src="https://user-images.githubusercontent.com/13572116/166609110-bbce1db3-965b-4494-85cd-e0ab75a69900.png">
