@@ -124,7 +124,6 @@ func (p *PostgresDB) GetCountryCodes(filter domain.Filter) ([]int, error) {
 	sql := fmt.Sprintf("SELECT id FROM %s ", countryTable) + filter.ToSQLOnLyCountry()
 	codes := []int{}
 	err := p.db.Select(&codes, sql)
-	logger.L.Debug("sql:", sql, " / error:", err)
 	if err != nil {
 		return []int{}, err
 	}
@@ -165,7 +164,6 @@ func (p *PostgresDB) UpdateCompanies(sampleCompany domain.Company, filter domain
 
 	companies := []domain.Company{}
 	err := p.db.Select(&companies, sql)
-	logger.L.Debug("sql:", sql, " / error:", err)
 	if err != nil {
 		logger.L.Warn("sql:", sql, " / error:", err)
 		return []domain.Company{}, errors.New(err.Error() + " / " + sql)
@@ -182,7 +180,6 @@ func (p *PostgresDB) DeleteCompanies(filter domain.Filter) ([]domain.Company, er
 
 	companies := []domain.Company{}
 	err := p.db.Select(&companies, sql)
-	logger.L.Debug("sql:", sql, " / error:", err)
 	if err != nil {
 		logger.L.Warn("sql:", sql, " / error:", err)
 		return []domain.Company{}, errors.New(err.Error() + " / " + sql)

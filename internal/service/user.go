@@ -69,7 +69,6 @@ func (s *UserService) GetAccessMatrixCyprus(IP string) domain.AccessMatrix {
 		if len(IP) > 7 {
 			country, err := s.IPAPI.GetCountry(IP)
 			if err != nil {
-				logger.L.Debug(err)
 				return accessCyprus
 			}
 			if country == CYPRUS {
@@ -93,7 +92,6 @@ func (s *UserService) GetAccessMatrixJWT(token string) domain.AccessMatrix {
 		if len(token) > 0 {
 			authOK, err := s.AuthJWT.CheckToken(token)
 			if err != nil {
-				logger.L.Debug(err)
 				return accessJWT
 			}
 			if authOK {
